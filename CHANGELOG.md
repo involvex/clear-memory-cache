@@ -1,8 +1,9 @@
-# 0.0.0 (2026-02-18)
+## [0.0.1](https://github.com/involvex/clear-memory-cache/compare/1d848044236dd21c8bf60c853f89958423d894c3...v0.0.1) (2026-02-18)
 
 ### Bug Fixes
 
 - correct npm and pnpm cache commands to match spec ([986f545](https://github.com/involvex/clear-memory-cache/commit/986f5451b6a03f39ad0fffc58389de1ceea69c67))
+- remove shell:true from execCommand to fix duplicate runs and DEP0190; add clear-gradle-cache command ([b61f97e](https://github.com/involvex/clear-memory-cache/commit/b61f97e2058c4fb504c6c875b2a0024381d5501f))
 - resolve Ink bare text node error in about.tsx ([8c7c6f5](https://github.com/involvex/clear-memory-cache/commit/8c7c6f5d2b6cd62122d73740e80b7dacc0492f9b))
 
 ### Features
