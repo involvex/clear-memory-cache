@@ -1,14 +1,5 @@
-// import React from 'react';
-import {Text} from 'ink';
+import Help from './commands/help.js';
 
-type Props = {
-	name: string | undefined;
-};
-
-export default function App({name = 'Stranger'}: Props) {
-	return (
-		<Text>
-			<Text color="green">{name}</Text>
-		</Text>
-	);
+export default function App() {
+	return <Help />;
 }
