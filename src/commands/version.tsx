@@ -1,6 +1,8 @@
-import pkg from '../../package.json';
 import {Text} from 'ink';
+import pkg from '../../package.json';
+
+const {version} = pkg;
 
 export default function Version() {
-	return <Text>{pkg.version}</Text>;
+	return <Text>{version}</Text>;
 }

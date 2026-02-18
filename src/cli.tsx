@@ -5,6 +5,7 @@ import meow from 'meow';
 import App from './app.js';
 import Help from './commands/help.js';
 import About from './commands/about.js';
+import Version from './commands/version.js';
 
 const cli = meow(
 	`
@@ -32,6 +33,8 @@ if (cli.input[0] === 'help') {
 	render(<Help />);
 } else if (cli.input[0] === 'about') {
 	render(<About />);
+} else if (cli.input[0] === 'version') {
+	render(<Version />);
 } else {
 	render(<App name={cli.flags.name} />);
 }

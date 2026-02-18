@@ -1,17 +1,18 @@
 import pkg from '../../package.json';
 import {Box, Text} from 'ink';
 import Link from 'ink-link';
+// import package from '../../package.json';
 
 export default function About() {
-	const {name, version, description} = pkg;
+	const {name, version, description, author, funding} = pkg;
 
 	return (
 		<Box flexDirection="column" padding={1}>
 			<Text bold>{name}</Text>
 			<Text>{description}</Text>
 			<Text>{version}</Text>
-			<Text bold>Author:</Text> <Text>{pkg.author}</Text>
-			<A href="https://github.com/involvex/clear-memory-cache">
+			<Text bold>Author:</Text> <Text>{author}</Text>
+			<A href={funding}>
 				<Text>GitHub</Text>
 			</A>
 		</Box>
@@ -21,7 +22,9 @@ export default function About() {
 function A({href, children}: {href: string; children: React.ReactNode}) {
 	return (
 		<Text>
-			<Link url={href}>{children}</Link>
+			<Link url={href}>
+				<Text>{children}</Text>
+			</Link>
 		</Text>
 	);
 }

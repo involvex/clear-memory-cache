@@ -9,8 +9,8 @@
 		"url": "https://github.com/sponsors/involvex"
 	},
 	"bin": {
-		"clear-memory-cache": "dist/cli.js",
-		"cmc": "dist/cli.js"
+		"clear-memory-cache": "dist/src/cli.js",
+		"cmc": "dist/src/cli.js"
 	},
 	"type": "module",
 	"engines": {
@@ -32,23 +32,26 @@
 		"dist"
 	],
 	"dependencies": {
-		"ink": "^4.1.0",
+		"@types/json-js": "^1.1.2",
+		"@types/jsonfile": "^6.1.4",
+		"@types/package-json": "^5.0.1",
+		"ink": "^6.7.0",
 		"ink-link": "^5.0.0",
-		"meow": "^11.0.0",
-		"react": "^18.2.0"
+		"meow": "^14.0.0",
+		"react": "^19.2.4"
 	},
 	"devDependencies": {
 		"@eslint/js": "latest",
-		"@sindresorhus/tsconfig": "^3.0.1",
-		"@types/react": "^18.0.32",
+		"@sindresorhus/tsconfig": "^8.1.0",
+		"@types/react": "^19.2.14",
 		"@vdemedes/prettier-config": "^2.0.1",
-		"ava": "^5.2.0",
+		"ava": "^6.4.1",
 		"chalk": "^5.2.0",
 		"eslint": "latest",
-		"eslint-config-xo-react": "^0.27.0",
+		"eslint-config-xo-react": "^0.29.0",
 		"eslint-plugin-react": "^7.32.2",
-		"eslint-plugin-react-hooks": "^4.6.0",
-		"ink-testing-library": "^3.0.0",
+		"eslint-plugin-react-hooks": "^7.0.1",
+		"ink-testing-library": "^4.0.0",
 		"jiti": "latest",
 		"prettier": "latest",
 		"prettier-plugin-organize-imports": "^4.3.0",
@@ -58,7 +61,7 @@
 		"ts-node": "^10.9.1",
 		"typescript": "^5.0.3",
 		"typescript-eslint": "latest",
-		"xo": "^0.53.1"
+		"xo": "^1.2.3"
 	},
 	"ava": {
 		"extensions": {
@@ -76,5 +79,8 @@
 			"react/prop-types": "off"
 		}
 	},
-	"prettier": "@vdemedes/prettier-config"
+	"prettier": "@vdemedes/prettier-config",
+	"trustedDependencies": [
+		"unrs-resolver"
+	]
 }
