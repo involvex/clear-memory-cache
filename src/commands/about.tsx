@@ -1,7 +1,6 @@
 import pkg from '../../package.json';
 import {Box, Text} from 'ink';
 import Link from 'ink-link';
-// import package from '../../package.json';
 
 export default function About() {
 	const {name, version, description, author, funding} = pkg;
@@ -11,20 +10,13 @@ export default function About() {
 			<Text bold>{name}</Text>
 			<Text>{description}</Text>
 			<Text>{version}</Text>
-			<Text bold>Author:</Text> <Text>{author}</Text>
-			<A href={funding}>
-				<Text>GitHub</Text>
-			</A>
+			<Text>
+				<Text bold>Author: </Text>
+				{author}
+			</Text>
+			<Text>
+				<Link url={funding}>GitHub Sponsors</Link>
+			</Text>
 		</Box>
-	);
-}
-
-function A({href, children}: {href: string; children: React.ReactNode}) {
-	return (
-		<Text>
-			<Link url={href}>
-				<Text>{children}</Text>
-			</Link>
-		</Text>
 	);
 }
