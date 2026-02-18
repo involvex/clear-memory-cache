@@ -32,7 +32,7 @@ export default function Help() {
 				<Text color="yellow" bold>
 					memory-clear
 				</Text>
-				{'          '}
+				{'           '}
 				Empty all process working sets <Text dimColor>(rammap -Et)</Text>
 			</Text>
 			<Text>
@@ -40,7 +40,7 @@ export default function Help() {
 				<Text color="yellow" bold>
 					cache-clear
 				</Text>
-				{'           '}
+				{'            '}
 				Empty system working set / caches <Text dimColor>(rammap -Es)</Text>
 			</Text>
 			<Text>
@@ -48,35 +48,51 @@ export default function Help() {
 				<Text color="yellow" bold>
 					empty-standby-memory
 				</Text>
-				{'  '}Empty standby list <Text dimColor>(rammap -E0)</Text>
+				{'   '}Empty standby list <Text dimColor>(rammap -E0)</Text>
 			</Text>
 			<Text>
 				{'  '}
 				<Text color="yellow" bold>
 					clear-pm-cache
 				</Text>
-				{'        '}Clear package manager caches
+				{'         '}Clear package manager caches
+			</Text>
+			<Text>
+				{'  '}
+				<Text color="yellow" bold>
+					clear-all
+				</Text>
+				{'              '}
+				memory-clear + empty-standby-memory + clear-pm-cache --all
+			</Text>
+			<Text>
+				{'  '}
+				<Text color="yellow" bold>
+					smart-clear
+				</Text>
+				{'            '}
+				Analyze memory and clear only what is necessary
 			</Text>
 			<Text>
 				{'  '}
 				<Text color="yellow" bold>
 					version
 				</Text>
-				{'               '}Show version
+				{'                '}Show version
 			</Text>
 			<Text>
 				{'  '}
 				<Text color="yellow" bold>
 					about
 				</Text>
-				{'                 '}Show package info
+				{'                  '}Show package info
 			</Text>
 			<Text>
 				{'  '}
 				<Text color="yellow" bold>
 					help
 				</Text>
-				{'                  '}Show this help message
+				{'                   '}Show this help message
 			</Text>
 			<Text> </Text>
 
@@ -108,6 +124,29 @@ export default function Help() {
 			</Text>
 			<Text> </Text>
 
+			<Text bold>smart-clear thresholds</Text>
+			<Text>
+				{'  '}
+				<Text color="red" bold>
+					{'< 10%'}
+				</Text>{' '}
+				free → CRITICAL: memory-clear + empty-standby-memory + cache-clear
+			</Text>
+			<Text>
+				{'  '}
+				<Text color="red">{'10–20%'}</Text> free → LOW:{'      '}
+				empty-standby-memory + cache-clear
+			</Text>
+			<Text>
+				{'  '}
+				<Text color="yellow">{'20–40%'}</Text> free → MODERATE: cache-clear
+			</Text>
+			<Text>
+				{'  '}
+				<Text color="green">{'>  40%'}</Text> free → HEALTHY:{'  '}no action
+			</Text>
+			<Text> </Text>
+
 			<Text bold>Examples</Text>
 			<Text>
 				{'  '}
@@ -120,6 +159,14 @@ export default function Help() {
 			<Text>
 				{'  '}
 				<Text color="green">$ cmc clear-pm-cache --npm</Text>
+			</Text>
+			<Text>
+				{'  '}
+				<Text color="green">$ cmc clear-all</Text>
+			</Text>
+			<Text>
+				{'  '}
+				<Text color="green">$ cmc smart-clear</Text>
 			</Text>
 			<Text>
 				{'  '}

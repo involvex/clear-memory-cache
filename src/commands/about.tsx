@@ -1,6 +1,6 @@
-import pkg from '../../package.json';
 import {Box, Text} from 'ink';
 import Link from 'ink-link';
+import pkg from '../pkg.js';
 
 export default function About() {
 	const {name, version, description, author, funding} = pkg;
