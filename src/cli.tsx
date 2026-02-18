@@ -4,6 +4,7 @@ import meow from 'meow';
 import About from './commands/about.js';
 import CacheClear from './commands/cache-clear.js';
 import ClearAll from './commands/clear-all.js';
+import ClearGradleCache from './commands/clear-gradle-cache.js';
 import ClearPmCache from './commands/clear-pm-cache.js';
 import EmptyStandbyMemory from './commands/empty-standby-memory.js';
 import Help from './commands/help.js';
@@ -22,7 +23,8 @@ const cli = meow(
     cache-clear            Empty system working set / caches (rammap -Es)
     empty-standby-memory   Empty standby list (rammap -E0)
     clear-pm-cache         Clear package manager caches
-    clear-all              Run memory-clear + empty-standby-memory + clear-pm-cache --all
+    clear-all              Run memory-clear + empty-standby-memory + clear-pm-cache --all + clear-gradle-cache
+    clear-gradle-cache     Delete Gradle caches (~/.gradle/caches or $GRADLE_HOME/caches)
     smart-clear            Analyze memory and clear only what is necessary
     help                   Show this help message
     about                  Show package information
@@ -91,6 +93,11 @@ switch (command) {
 
 	case 'clear-all': {
 		render(<ClearAll />);
+		break;
+	}
+
+	case 'clear-gradle-cache': {
+		render(<ClearGradleCache />);
 		break;
 	}
 

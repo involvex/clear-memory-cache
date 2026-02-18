@@ -1,3 +1,6 @@
+import {existsSync, rmSync} from 'node:fs';
+import {homedir} from 'node:os';
+import {join} from 'node:path';
 import {Box, Text} from 'ink';
 import {useEffect, useState} from 'react';
 import {execCommand, type ExecResult} from '../utils/execute.js';
@@ -11,9 +14,9 @@ const STEPS = [
 		args: ['pm', 'cache', 'rm', '-g'],
 	},
 	{
-		label: 'npm cache            (npm cache rm -g --force)',
+		label: 'npm cache            (npm cache clean --force)',
 		cmd: 'npm',
-		args: ['cache', 'rm', '-g', '--force'],
+		args: ['cache', 'clean', '--force'],
 	},
 	{
 		label: 'pnpm cache           (pnpm cache delete)',
@@ -27,6 +30,34 @@ const STEPS = [
 	},
 ];
 
+function clearGradleCache(): ExecResult {
+	const gradleHome = process.env['GRADLE_HOME'];
+	const cachePath = gradleHome
+		? join(gradleHome, 'caches')
+		: join(homedir(), '.gradle', 'caches');
+
+	const label = `gradle cache         (rm ${cachePath})`;
+
+	if (!existsSync(cachePath)) {
+		return {
+			label,
+			success: false,
+			output: 'Directory not found — nothing to delete.',
+		};
+	}
+
+	try {
+		rmSync(cachePath, {recursive: true, force: true});
+		return {label, success: true, output: ''};
+	} catch (err) {
+		return {
+			label,
+			success: false,
+			output: err instanceof Error ? err.message : 'Unknown error.',
+		};
+	}
+}
+
 export default function ClearAll() {
 	const [results, setResults] = useState<ExecResult[]>([]);
 	const [done, setDone] = useState(false);
@@ -36,6 +67,8 @@ export default function ClearAll() {
 		for (const step of STEPS) {
 			output.push(execCommand(step.label, step.cmd, step.args));
 		}
+
+		output.push(clearGradleCache());
 
 		setResults(output);
 		setDone(true);

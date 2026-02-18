@@ -63,7 +63,16 @@ export default function Help() {
 					clear-all
 				</Text>
 				{'              '}
-				memory-clear + empty-standby-memory + clear-pm-cache --all
+				memory-clear + standby + pm-caches + gradle-cache
+			</Text>
+			<Text>
+				{'  '}
+				<Text color="yellow" bold>
+					clear-gradle-cache
+				</Text>
+				{'     '}
+				Delete Gradle caches{' '}
+				<Text dimColor>(~/.gradle/caches or $GRADLE_HOME/caches)</Text>
 			</Text>
 			<Text>
 				{'  '}

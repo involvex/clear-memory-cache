@@ -12,7 +12,6 @@ export function execCommand(
 	args: string[],
 ): ExecResult {
 	const result = spawnSync(cmd, args, {
-		shell: true,
 		encoding: 'utf8',
 		windowsHide: true,
 	});
