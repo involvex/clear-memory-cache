@@ -23,8 +23,13 @@ const PM_COMMANDS: Array<{
 	args: string[];
 }> = [
 	{key: 'bun', label: 'bun', cmd: 'bun', args: ['pm', 'cache', 'rm', '-g']},
-	{key: 'npm', label: 'npm', cmd: 'npm', args: ['cache', 'clean', '--force']},
-	{key: 'pnpm', label: 'pnpm', cmd: 'pnpm', args: ['store', 'prune']},
+	{
+		key: 'npm',
+		label: 'npm',
+		cmd: 'npm',
+		args: ['cache', 'rm', '-g', '--force'],
+	},
+	{key: 'pnpm', label: 'pnpm', cmd: 'pnpm', args: ['cache', 'delete']},
 	{key: 'yarn', label: 'yarn', cmd: 'yarn', args: ['cache', 'clean']},
 ];
 

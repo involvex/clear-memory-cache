@@ -89,12 +89,12 @@ export default function Help() {
 			<Text>
 				{'  '}
 				<Text color="cyan">--npm</Text>
-				{'   '}npm cache clean --force
+				{'   '}npm cache rm -g --force
 			</Text>
 			<Text>
 				{'  '}
 				<Text color="cyan">--pnpm</Text>
-				{'  '}pnpm store prune
+				{'  '}pnpm cache delete
 			</Text>
 			<Text>
 				{'  '}
