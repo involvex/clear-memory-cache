@@ -4,6 +4,17 @@
 	"author": "involvex",
 	"version": "0.0.0",
 	"license": "MIT",
+	"repository": {
+		"url": "https://github.com/involvex/clear-memory-cache",
+		"type": "git"
+	},
+	"keywords": [
+		"cli",
+		"clear-memory",
+		"clear-standby-memory",
+		"clear-ram",
+		"cache-clear"
+	],
 	"funding": "https://github.com/sponsors/involvex",
 	"sponsor": {
 		"url": "https://github.com/sponsors/involvex"
