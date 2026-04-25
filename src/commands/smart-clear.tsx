@@ -3,7 +3,7 @@ import {Box, Text} from 'ink';
 import {useEffect, useState} from 'react';
 import {execCommand, type ExecResult} from '../utils/execute.js';
 
-function formatMB(bytes: number): string {
+function formatMb(bytes: number): string {
 	return `${Math.round(bytes / 1024 / 1024)} MB`;
 }
 
@@ -12,19 +12,19 @@ type Level = 'healthy' | 'moderate' | 'low' | 'critical';
 type SmartResult = {
 	level: Level;
 	freePercent: number;
-	totalMB: string;
-	freeMB: string;
+	totalMb: string;
+	freeMb: string;
 	results: ExecResult[];
 };
 
-const LEVEL_COLOR: Record<Level, string> = {
+const levelColor: Record<Level, string> = {
 	healthy: 'green',
 	moderate: 'yellow',
 	low: 'red',
 	critical: 'redBright',
 };
 
-const LEVEL_ICON: Record<Level, string> = {
+const levelIcon: Record<Level, string> = {
 	healthy: '✅',
 	moderate: '🟡',
 	low: '⚠️ ',
@@ -78,8 +78,8 @@ export default function SmartClear() {
 		setResult({
 			level,
 			freePercent,
-			totalMB: formatMB(total),
-			freeMB: formatMB(free),
+			totalMb: formatMb(total),
+			freeMb: formatMb(free),
 			results,
 		});
 	}, []);
@@ -96,17 +96,17 @@ export default function SmartClear() {
 		<Box flexDirection="column" paddingY={1}>
 			<Text bold>Memory Analysis</Text>
 			<Text>
-				{'  '}Total RAM: <Text bold>{result.totalMB}</Text>
+				{'  '}Total RAM: <Text bold>{result.totalMb}</Text>
 			</Text>
 			<Text>
 				{'  '}Free RAM:{'  '}
-				<Text bold>{result.freeMB}</Text>{' '}
+				<Text bold>{result.freeMb}</Text>{' '}
 				<Text dimColor>({result.freePercent.toFixed(1)}%)</Text>
 			</Text>
 			<Text>
 				{'  '}Status:{'   '}
-				<Text color={LEVEL_COLOR[result.level]} bold>
-					{LEVEL_ICON[result.level]} {result.level.toUpperCase()}
+				<Text bold color={levelColor[result.level]}>
+					{levelIcon[result.level]} {result.level.toUpperCase()}
 				</Text>
 			</Text>
 			<Text> </Text>
@@ -127,7 +127,7 @@ export default function SmartClear() {
 										{'  '}❌ {r.label}
 									</Text>
 									{r.output.length > 0 && (
-										<Text color="red" dimColor>
+										<Text dimColor color="red">
 											{'      '}
 											{r.output}
 										</Text>

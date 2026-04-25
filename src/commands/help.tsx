@@ -29,7 +29,7 @@ export default function Help() {
 			<Text bold>Commands</Text>
 			<Text>
 				{'  '}
-				<Text color="yellow" bold>
+				<Text bold color="yellow">
 					memory-clear
 				</Text>
 				{'           '}
@@ -37,7 +37,7 @@ export default function Help() {
 			</Text>
 			<Text>
 				{'  '}
-				<Text color="yellow" bold>
+				<Text bold color="yellow">
 					cache-clear
 				</Text>
 				{'            '}
@@ -45,21 +45,21 @@ export default function Help() {
 			</Text>
 			<Text>
 				{'  '}
-				<Text color="yellow" bold>
+				<Text bold color="yellow">
 					empty-standby-memory
 				</Text>
 				{'   '}Empty standby list <Text dimColor>(rammap -E0)</Text>
 			</Text>
 			<Text>
 				{'  '}
-				<Text color="yellow" bold>
+				<Text bold color="yellow">
 					clear-pm-cache
 				</Text>
 				{'         '}Clear package manager caches
 			</Text>
 			<Text>
 				{'  '}
-				<Text color="yellow" bold>
+				<Text bold color="yellow">
 					clear-all
 				</Text>
 				{'              '}
@@ -67,7 +67,7 @@ export default function Help() {
 			</Text>
 			<Text>
 				{'  '}
-				<Text color="yellow" bold>
+				<Text bold color="yellow">
 					clear-gradle-cache
 				</Text>
 				{'     '}
@@ -76,7 +76,7 @@ export default function Help() {
 			</Text>
 			<Text>
 				{'  '}
-				<Text color="yellow" bold>
+				<Text bold color="yellow">
 					smart-clear
 				</Text>
 				{'            '}
@@ -84,21 +84,21 @@ export default function Help() {
 			</Text>
 			<Text>
 				{'  '}
-				<Text color="yellow" bold>
+				<Text bold color="yellow">
 					version
 				</Text>
 				{'                '}Show version
 			</Text>
 			<Text>
 				{'  '}
-				<Text color="yellow" bold>
+				<Text bold color="yellow">
 					about
 				</Text>
 				{'                  '}Show package info
 			</Text>
 			<Text>
 				{'  '}
-				<Text color="yellow" bold>
+				<Text bold color="yellow">
 					help
 				</Text>
 				{'                   '}Show this help message
@@ -136,19 +136,19 @@ export default function Help() {
 			<Text bold>smart-clear thresholds</Text>
 			<Text>
 				{'  '}
-				<Text color="red" bold>
+				<Text bold color="red">
 					{'< 10%'}
 				</Text>{' '}
 				free → CRITICAL: memory-clear + empty-standby-memory + cache-clear
 			</Text>
 			<Text>
 				{'  '}
-				<Text color="red">{'10–20%'}</Text> free → LOW:{'      '}
+				<Text color="red">10–20%</Text> free → LOW:{'      '}
 				empty-standby-memory + cache-clear
 			</Text>
 			<Text>
 				{'  '}
-				<Text color="yellow">{'20–40%'}</Text> free → MODERATE: cache-clear
+				<Text color="yellow">20–40%</Text> free → MODERATE: cache-clear
 			</Text>
 			<Text>
 				{'  '}

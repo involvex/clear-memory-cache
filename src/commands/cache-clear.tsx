@@ -1,6 +1,6 @@
+import {spawnSync} from 'node:child_process';
 import {Box, Text} from 'ink';
 import {useEffect, useState} from 'react';
-import {spawnSync} from 'node:child_process';
 
 type Status = 'running' | 'success' | 'error';
 
@@ -16,11 +16,11 @@ export default function CacheClear() {
 		});
 
 		if (result.error ?? result.status !== 0) {
-			const errMsg =
+			const errorMessage =
 				result.error?.message ??
 				result.stderr?.trim() ??
 				`Exit code: ${String(result.status)}`;
-			setOutput(errMsg);
+			setOutput(errorMessage);
 			setStatus('error');
 		} else {
 			setOutput(result.stdout?.trim() ?? '');
@@ -42,7 +42,7 @@ export default function CacheClear() {
 			{status === 'error' && (
 				<>
 					<Text color="red">❌ Failed to clear system cache.</Text>
-					<Text color="red" dimColor>
+					<Text dimColor color="red">
 						{output}
 					</Text>
 					<Text dimColor>Make sure rammap is installed and in PATH.</Text>

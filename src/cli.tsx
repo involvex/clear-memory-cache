@@ -116,6 +116,11 @@ switch (command) {
 		break;
 	}
 
+	case undefined: {
+		render(<Help />);
+		break;
+	}
+
 	default: {
 		render(<Help />);
 		break;

@@ -1,11 +1,12 @@
 import {existsSync, rmSync} from 'node:fs';
 import {homedir} from 'node:os';
 import {join} from 'node:path';
+import process from 'node:process';
 import {Box, Text} from 'ink';
 import {useEffect, useState} from 'react';
 import {execCommand, type ExecResult} from '../utils/execute.js';
 
-const STEPS = [
+const steps = [
 	{label: 'memory-clear        (rammap -Et)', cmd: 'rammap', args: ['-Et']},
 	{label: 'empty-standby-memory (rammap -E0)', cmd: 'rammap', args: ['-E0']},
 	{
@@ -49,11 +50,11 @@ function clearGradleCache(): ExecResult {
 	try {
 		rmSync(cachePath, {recursive: true, force: true});
 		return {label, success: true, output: ''};
-	} catch (err) {
+	} catch (error) {
 		return {
 			label,
 			success: false,
-			output: err instanceof Error ? err.message : 'Unknown error.',
+			output: error instanceof Error ? error.message : 'Unknown error.',
 		};
 	}
 }
@@ -64,7 +65,7 @@ export default function ClearAll() {
 
 	useEffect(() => {
 		const output: ExecResult[] = [];
-		for (const step of STEPS) {
+		for (const step of steps) {
 			output.push(execCommand(step.label, step.cmd, step.args));
 		}
 
@@ -77,24 +78,25 @@ export default function ClearAll() {
 	return (
 		<Box flexDirection="column" paddingY={1}>
 			{!done && <Text color="yellow">⏳ Running full clear sequence…</Text>}
-			{done &&
-				results.map(r => (
-					<Box key={r.label} flexDirection="column">
-						{r.success ? (
-							<Text color="green">✅ {r.label}</Text>
-						) : (
-							<>
-								<Text color="red">❌ {r.label}</Text>
-								{r.output.length > 0 && (
-									<Text color="red" dimColor>
-										{'   '}
-										{r.output}
-									</Text>
-								)}
-							</>
-						)}
-					</Box>
-				))}
+			{done
+				? results.map(r => (
+						<Box key={r.label} flexDirection="column">
+							{r.success ? (
+								<Text color="green">✅ {r.label}</Text>
+							) : (
+								<>
+									<Text color="red">❌ {r.label}</Text>
+									{r.output.length > 0 && (
+										<Text dimColor color="red">
+											{'   '}
+											{r.output}
+										</Text>
+									)}
+								</>
+							)}
+						</Box>
+					))
+				: null}
 		</Box>
 	);
 }

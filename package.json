@@ -31,8 +31,8 @@
 		"build": "tsc",
 		"dev": "bun run src/cli.tsx",
 		"format": "prettier --write .",
-		"lint": "eslint src",
-		"lint:fix": "eslint src --fix",
+		"lint": "xo",
+		"lint:fix": "xo --fix",
 		"typecheck": "tsc --noEmit",
 		"prebuild": "bun run format && bun run lint:fix && bun run typecheck",
 		"test": "prettier --check . && xo && ava",
@@ -78,19 +78,13 @@
 	},
 	"ava": {
 		"extensions": {
+			"js": true,
 			"ts": "module",
 			"tsx": "module"
 		},
 		"nodeArguments": [
 			"--loader=ts-node/esm"
 		]
-	},
-	"xo": {
-		"extends": "xo-react",
-		"prettier": true,
-		"rules": {
-			"react/prop-types": "off"
-		}
 	},
 	"overrides": {
 		"@eslint/plugin-kit": "^0.3.4"

@@ -1,6 +1,6 @@
+import {spawnSync} from 'node:child_process';
 import {Box, Text} from 'ink';
 import {useEffect, useState} from 'react';
-import {spawnSync} from 'node:child_process';
 
 type PmFlags = {
 	bun: boolean;
@@ -16,7 +16,7 @@ type PmResult = {
 	output: string;
 };
 
-const PM_COMMANDS: Array<{
+const pmCommands: Array<{
 	key: keyof Omit<PmFlags, 'all'>;
 	label: string;
 	cmd: string;
@@ -33,14 +33,14 @@ const PM_COMMANDS: Array<{
 	{key: 'yarn', label: 'yarn', cmd: 'yarn', args: ['cache', 'clean']},
 ];
 
-export default function ClearPmCache({flags}: {flags: PmFlags}) {
+export default function ClearPmCache({flags}: {readonly flags: PmFlags}) {
 	const [results, setResults] = useState<PmResult[]>([]);
 	const [done, setDone] = useState(false);
 
 	useEffect(() => {
 		const selected = flags.all
-			? PM_COMMANDS
-			: PM_COMMANDS.filter(pm => flags[pm.key]);
+			? pmCommands
+			: pmCommands.filter(pm => flags[pm.key]);
 
 		if (selected.length === 0) {
 			setDone(true);
@@ -57,13 +57,13 @@ export default function ClearPmCache({flags}: {flags: PmFlags}) {
 			});
 
 			const success = !result.error && result.status === 0;
-			const msg = success
+			const errorMessage = success
 				? (result.stdout?.trim() ?? '')
 				: (result.error?.message ??
 					result.stderr?.trim() ??
 					`Exit code: ${String(result.status)}`);
 
-			output.push({pm: pm.label, success, output: msg});
+			output.push({pm: pm.label, success, output: errorMessage});
 		}
 
 		setResults(output);
@@ -88,28 +88,29 @@ export default function ClearPmCache({flags}: {flags: PmFlags}) {
 	return (
 		<Box flexDirection="column" paddingY={1}>
 			{!done && <Text color="yellow">⏳ Clearing package manager caches…</Text>}
-			{done &&
-				results.map(r => (
-					<Box key={r.pm} flexDirection="column" marginBottom={0}>
-						{r.success ? (
-							<Text color="green">
-								✅ <Text bold>{r.pm}</Text> cache cleared.
-								{r.output.length > 0 && <Text dimColor> {r.output}</Text>}
-							</Text>
-						) : (
-							<>
-								<Text color="red">
-									❌ <Text bold>{r.pm}</Text> cache clear failed.
+			{done
+				? results.map(r => (
+						<Box key={r.pm} flexDirection="column" marginBottom={0}>
+							{r.success ? (
+								<Text color="green">
+									✅ <Text bold>{r.pm}</Text> cache cleared.
+									{r.output.length > 0 && <Text dimColor> {r.output}</Text>}
 								</Text>
-								{r.output.length > 0 && (
-									<Text color="red" dimColor>
-										{r.output}
+							) : (
+								<>
+									<Text color="red">
+										❌ <Text bold>{r.pm}</Text> cache clear failed.
 									</Text>
-								)}
-							</>
-						)}
-					</Box>
-				))}
+									{r.output.length > 0 && (
+										<Text dimColor color="red">
+											{r.output}
+										</Text>
+									)}
+								</>
+							)}
+						</Box>
+					))
+				: null}
 		</Box>
 	);
 }

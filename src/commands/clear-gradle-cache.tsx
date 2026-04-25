@@ -1,6 +1,7 @@
 import {existsSync, rmSync} from 'node:fs';
 import {homedir} from 'node:os';
 import {join} from 'node:path';
+import process from 'node:process';
 import {Box, Text} from 'ink';
 import {useEffect, useState} from 'react';
 
@@ -41,12 +42,14 @@ export default function ClearGradleCache() {
 				path: cachePath,
 				message: 'Gradle cache deleted.',
 			});
-		} catch (err) {
+		} catch (error) {
 			setResult({
 				success: false,
 				path: cachePath,
 				message:
-					err instanceof Error ? err.message : 'Unknown error during deletion.',
+					error instanceof Error
+						? error.message
+						: 'Unknown error during deletion.',
 			});
 		}
 	}, []);
@@ -54,7 +57,7 @@ export default function ClearGradleCache() {
 	return (
 		<Box flexDirection="column" paddingY={1}>
 			{result === null && <Text color="yellow">⏳ Clearing Gradle cache…</Text>}
-			{result !== null && result.success && (
+			{result !== null && result.success ? (
 				<Box flexDirection="column">
 					<Text color="green">✅ gradle cache cleared.</Text>
 					<Text dimColor>
@@ -62,7 +65,7 @@ export default function ClearGradleCache() {
 						{result.path}
 					</Text>
 				</Box>
-			)}
+			) : null}
 			{result !== null && !result.success && (
 				<Box flexDirection="column">
 					<Text color="red">❌ gradle cache — {result.message}</Text>
