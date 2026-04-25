@@ -1,9 +1,8 @@
 /**
  * Runtime package.json reader.
- * Avoids static `import pkg from '../../package.json'` which causes TypeScript
- * to copy package.json into dist/ via resolveJsonModule.
+ * Works both in development (from src/) and production (from dist/src/).
  */
-import {readFileSync} from 'node:fs';
+import {readFileSync, existsSync} from 'node:fs';
 import {dirname, join} from 'node:path';
 import {fileURLToPath} from 'node:url';
 
@@ -16,8 +15,10 @@ type Pkg = {
 };
 
 const dir = dirname(fileURLToPath(import.meta.url));
-const pkg = JSON.parse(
-	readFileSync(join(dir, '../package.json'), 'utf8'),
-) as Pkg;
+const candidate1 = join(dir, '../package.json');
+const candidate2 = join(dir, '../../package.json');
+const pkgPath = existsSync(candidate1) ? candidate1 : candidate2;
+
+const pkg = JSON.parse(readFileSync(pkgPath, 'utf8')) as Pkg;
 
 export default pkg;

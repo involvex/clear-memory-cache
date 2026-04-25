@@ -7,8 +7,7 @@
 		"esModuleInterop": true,
 		"types": ["node", "json-js", "jsonfile", "package-json"],
 		"module": "Node16",
-		"rootDir": "src"
+		"rootDir": "."
 	},
-	"include": ["src", "test"],
-	"exclude": ["dist", "node_modules"]
+	"include": ["src"]
 }
