@@ -6,7 +6,8 @@
 		"resolveJsonModule": true,
 		"esModuleInterop": true,
 		"types": ["node", "json-js", "jsonfile", "package-json"],
-		"module": "Node16"
+		"module": "Node16",
+		"rootDir": "src"
 	},
 	"include": ["src"],
 	"exclude": ["dist", "node_modules", "test"]
